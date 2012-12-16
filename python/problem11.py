@@ -1,3 +1,11 @@
+#!/usr/bin/python  
+#
+# Problem 11
+# 22 February 2002
+#
+# What is the greatest product of four adjacent numbers in any
+# direction (up, down, left, right, or diagonally) in the 20×20 grid?
+
 nums='''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
