@@ -110,4 +110,4 @@ nums = '''37107287533902102798797998220837590246510135740250
 sum=0
 for num in nums.split():
     sum+=int(num)
-    print (sum)
+print (str(sum)[:10])
