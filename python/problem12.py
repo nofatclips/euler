@@ -32,10 +32,10 @@ def factor(num):
             ret += 1 if quotient==i else 2
     return ret
 
-maxNum, maxDiv = 0,0
-for num in triangular(500):
+maxNum, maxDiv, n = 0,0, 500
+for num in triangular(n):
     div = factor(num)
     if div>maxDiv:
         print ("%i has %i divisors" % (num, div))
         maxNum, maxDiv = num, div
-    if maxDiv>=500: break
+    if maxDiv>=n: break
