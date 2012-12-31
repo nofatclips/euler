@@ -9,8 +9,8 @@
 
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-def sumAll(max):
-    return sum(range(max))
+#def sumAll(max):
+#    return sum(range(max))
     
 def sureshot(max):
     return sum([i for i in range(max) if i%3==0 or i%5==0])
