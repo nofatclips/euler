@@ -39,6 +39,12 @@ class Collatz:
     # True if num has been checked
     def __getitem__ (self, num):
         return self.nums[num]
+	
+    def __iter__ (self):
+        a = self.nextNumberToCheck()
+        while a:
+            yield a
+            a = self.nextNumberToCheck()
 
     @staticmethod
     def _sequenceGenerator(n):
@@ -58,7 +64,7 @@ class Collatz:
 
     def nextNumberToCheck(self):
         # Skip even values: there is always a sequence starting with
-        # an lower odd number that includes the one starting with
+        # a lower odd number that includes the one starting with
         # an even one
         for i in range(self.lastNumberChecked, self.maxNum+1, 2):
             if not self[i]:
@@ -67,14 +73,16 @@ class Collatz:
         return None
 
     def findLongestSequence(self):
-        current = self.nextNumberToCheck()
-        while (current):
+        #current = self.nextNumberToCheck()
+        #while (current):
+        for sequence in self:
             #print (current)
             leng = self.generateSequence(current)
             if leng>self.longestSequence:
                 self.longestSequence = leng
                 self.producesLongest = current
-            current = self.nextNumberToCheck()
+            #current = self.nextNumberToCheck()
         return self.producesLongest
 
-print (Collatz(1000000).findLongestSequence())
+#print (Collatz(100000).findLongestSequence()) #77031
+print (Collatz(1000000).findLongestSequence()) #837799
