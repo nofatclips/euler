@@ -18,7 +18,7 @@ from math import sqrt
 
 def triangular(start=1):
     cnt=start
-    n=cnt*(cnt+1)/2
+    n=cnt*(cnt+1)//2
     while True:
         yield n
         cnt+=1
@@ -32,10 +32,14 @@ def factor(num):
             ret += 1 if quotient==i else 2
     return ret
 
-maxNum, maxDiv = 0,0
-for num in triangular(500):
-    div = factor(num)
-    if div>maxDiv:
-        print ("%i has %i divisors" % (num, div))
-        maxNum, maxDiv = num, div
-    if maxDiv>=500: break
+def firstTriangle (n):
+	maxNum, maxDiv = 0,0
+	for num in triangular(n):
+		div = factor(num)
+		if div>maxDiv:
+			#print ("%i has %i divisors" % (num, div))
+			maxNum, maxDiv = num, div
+		if maxDiv>=n: break
+	return maxNum
+
+print (firstTriangle(500))
