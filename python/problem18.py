@@ -14,23 +14,6 @@
 
 # Find the maximum total from top to bottom of the triangle below:
 
-class numberTree:
-
-    def __init__ (self, numbers):
-        self.numbers = numbers
-        self.tree = list(line.split() for line in numbers.splitlines())
-        self.length = len(self.tree)
-        self.root = self.getBinaryTree()
-
-    def getBinaryTree (self):
-        parents, children = [None for i in range(self.length+1)], []
-        for row in reversed(self.tree):
-            parents, children = [], parents
-            for i in range(len(row)):
-                newParent = Node(int(row[i]), children[i], children[i+1])
-                parents.append(newParent)
-        return newParent
-
 class Node:
 
     def __init__(self, value, left=None, right=None):
@@ -44,6 +27,26 @@ class Node:
     def hasChildren(self):
         return self.left or self.right
 
+class TreeFactory:
+
+    def __init__ (self, matrix):
+        self.tree = matrix
+        self.length = len(self.tree)
+
+    def getBinaryTree (self):
+        parents, children = [None for i in range(self.length+1)], []
+        for row in reversed(self.tree):
+            parents, children = [], parents
+            for i in range(len(row)):
+                ancestor = Node(int(row[i]), children[i], children[i+1])
+                parents.append(ancestor)
+        return ancestor # The last ancestor is the root of the tree
+
+    @staticmethod
+    def fromString(numbers):
+        matrix = list(line.split() for line in numbers.splitlines())
+        return TreeFactory(matrix).getBinaryTree()
+
 def getSums(tree):
     if tree.hasChildren():
         for x in getSums(tree.left):
@@ -54,12 +57,7 @@ def getSums(tree):
         yield tree.value
 
 def maxSum(numbers):
-    return max(getSums(numbers.root))
-
-littleOne = '''    3
-   7 4
-  2 4 6
- 8 5 9 3'''
+    return max(getSums(numbers))
 
 numbers = '''        75
                    95 64
@@ -78,12 +76,6 @@ numbers = '''        75
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 '''
 
-#littleTree = numberTree(littleOne)
-
-#print (littleTree)
-#for aSum in getSums(littleTree.root):
-#    print (aSum)
-
-bigTree = numberTree(numbers)
+bigTree = TreeFactory.fromString(numbers)
 
 print (maxSum(bigTree))
